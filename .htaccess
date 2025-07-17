@@ -1,3 +1,4 @@
-<FilesMatch "^(config\.php|config_mail\.php|\.env)$">
+<FilesMatch "^(\.env)$">
     Require all denied
 </FilesMatch>
+

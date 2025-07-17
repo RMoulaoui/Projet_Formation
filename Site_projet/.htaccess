@@ -1,9 +1,9 @@
 # Active la réécriture d'URL (obligatoire pour les redirections)
 RewriteEngine On
 
-# Redirige vers HTTPS (même si le certificat n’est pas encore activé, prêt pour plus tard)
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# ⚠️ NE REDIRIGE PAS vers HTTPS tant que le certificat n’est pas délivré
+# RewriteCond %{HTTPS} !=on
+# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
 # Bloque l’accès aux fichiers sensibles
 <FilesMatch "^(\.env|\.git|\.htaccess|config\.php|config_mail\.php)$">
