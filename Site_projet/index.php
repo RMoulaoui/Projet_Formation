@@ -2,9 +2,13 @@
 error_reporting(0);
  ?>
 
-<?php require_once 'config.php'; ?>
+
+
+
 
 <?php
+require_once __DIR__ . '/../config.php';
+
 $requete = $pdo->query("SELECT * FROM projets LIMIT 3");
 $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
 ?>

@@ -8,7 +8,8 @@ if (!isset($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== tru
 ?>
 
 <?php
-require_once '../config.php';
+require_once(__DIR__ . '/../../config.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $titres = $_POST['titre'] ?? [];

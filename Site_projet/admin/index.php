@@ -1,4 +1,6 @@
-<?php
+<?php ini_set('display_errors', 0);
+
+
 session_start();
 if (!isset($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== true) {
     header('Location: login.php');
@@ -7,7 +9,8 @@ if (!isset($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== tru
 ?>
 
 <?php
-require_once '../config.php';
+require_once(__DIR__ . '/../../config.php');
+
 
 // Nombre de projets par page
 $limite = 6;

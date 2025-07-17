@@ -2,7 +2,7 @@
 
 <?php
 
-require_once 'config.php';
+require_once __DIR__ . '/../config.php';
 $stmt = $pdo->query("SELECT * FROM projets ORDER BY id DESC");
 $projets = $stmt->fetchAll();
 

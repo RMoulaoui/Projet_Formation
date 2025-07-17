@@ -7,7 +7,8 @@ if (!isset($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== tru
 ?>
 
 <?php
-require_once '../config.php';
+require_once(__DIR__ . '/../../config.php');
+
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id = (int) $_GET['id'];
