@@ -42,9 +42,8 @@ try {
     $mail->Port       = $mailConfig['smtp_port'];
 
     // Expéditeur et destinataire
-    $mail->setFrom('testdecopaint@gmail.com', 'Formulaire Decopaint');
+    $mail->setFrom('formulaire@decopaint.fr', 'Formulaire Decopaint');
     $mail->addReplyTo($email, "$prenom $nom");
-
     $mail->addAddress('testdecopaint@gmail.com'); 
 
     // Contenu
