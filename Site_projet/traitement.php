@@ -1,6 +1,5 @@
-<?php ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+<?php ini_set('display_errors', 0);
+
  ?>
 
 <?php
@@ -43,12 +42,22 @@ try {
     $mail->Port       = $mailConfig['smtp_port'];
 
     // Expéditeur et destinataire
-    $mail->setFrom($email, "$prenom $nom");
+    $mail->setFrom('testdecopaint@gmail.com', 'Formulaire Decopaint');
+    $mail->addReplyTo($email, "$prenom $nom");
+
     $mail->addAddress('testdecopaint@gmail.com'); 
 
     // Contenu
+    $mail->isHTML(true);
     $mail->Subject = 'Nouveau message depuis le site Decopaint';
-    $mail->Body = "Statut : $statut\nNom : $nom\nPrénom : $prenom\nEmail : $email\nMessage :\n$message";
+    $mail->Body = "
+    <strong>Statut :</strong> $statut<br>
+    <strong>Nom :</strong> $nom<br>
+    <strong>Prénom :</strong> $prenom<br>
+    <strong>Email :</strong> $email<br>
+    <strong>Message :</strong><br>" . nl2br($message);
+    $mail->AltBody = "Statut : $statut\nNom : $nom\nPrénom : $prenom\nEmail : $email\nMessage :\n$message";
+
 
 
     $mail->send();

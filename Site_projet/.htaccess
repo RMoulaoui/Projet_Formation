@@ -1,19 +1,23 @@
-# Active la réécriture d'URL (obligatoire pour les redirections)
 RewriteEngine On
 
-# ⚠️ NE REDIRIGE PAS vers HTTPS tant que le certificat n’est pas délivré
-# RewriteCond %{HTTPS} !=on
-# RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+# Redirige toutes les requêtes HTTP vers HTTPS
+
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
 
 # Bloque l’accès aux fichiers sensibles
+
 <FilesMatch "^(\.env|\.git|\.htaccess|config\.php|config_mail\.php)$">
     Require all denied
 </FilesMatch>
 
 # Désactive l'affichage de l’index si pas de index.php ou index.html
+
 Options -Indexes
 
 # Active la protection contre les scripts malveillants renommés
+
 <FilesMatch "\.(bak|config|sql|ini|log|sh)$">
     Require all denied
 </FilesMatch>
