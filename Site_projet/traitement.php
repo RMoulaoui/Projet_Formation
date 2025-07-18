@@ -42,19 +42,25 @@ try {
     $mail->Port       = $mailConfig['smtp_port'];
 
     // Expéditeur et destinataire
-    $mail->setFrom('formulaire@decopaint.fr', 'Formulaire Decopaint');
+    $mail->setFrom('contact@decopaint.fr', 'Formulaire Decopaint');
     $mail->addReplyTo($email, "$prenom $nom");
-    $mail->addAddress('testdecopaint@gmail.com'); 
+    $mail->addAddress('contact@decopaint.fr'); 
 
     // Contenu
+    $mail->CharSet = 'UTF-8';
     $mail->isHTML(true);
     $mail->Subject = 'Nouveau message depuis le site Decopaint';
     $mail->Body = "
-    <strong>Statut :</strong> $statut<br>
-    <strong>Nom :</strong> $nom<br>
-    <strong>Prénom :</strong> $prenom<br>
-    <strong>Email :</strong> $email<br>
-    <strong>Message :</strong><br>" . nl2br($message);
+    <html>
+    <head><meta charset='UTF-8'></head>
+    <body>
+        <strong>Statut :</strong> $statut<br>
+        <strong>Nom :</strong> $nom<br>
+        <strong>Prénom :</strong> $prenom<br>
+        <strong>Email :</strong> $email<br>
+        <strong>Message :</strong><br><br>" . nl2br($message) . "
+    </body>
+    </html>";
     $mail->AltBody = "Statut : $statut\nNom : $nom\nPrénom : $prenom\nEmail : $email\nMessage :\n$message";
 
 
