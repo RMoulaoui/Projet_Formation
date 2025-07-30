@@ -29,21 +29,6 @@ $(document).ready(function(){
   });
 
 
-    // ACTIVER SWIPE SUR LA PREMIERE IMAGE DU CAROUSSEL DE L'ACCUEIL
-    
-  if ($('body').hasClass('accueil')) {
-    const carousel = document.querySelector('#carouselExampleDark');
-
-    if (carousel) {
-      const bsCarousel = bootstrap.Carousel.getOrCreateInstance(carousel);
-      bsCarousel.to(0);
-    }
-  }
-
-  
-
-
-
 //PORTFOLIO 
     
     // "Images Cachées" Portfolio
@@ -98,7 +83,97 @@ $(document).ready(function(){
     
 });
 
+
+
 document.addEventListener("DOMContentLoaded", function () {
+
+  //Caroussel page d'accueil
+
+
+  const track = document.querySelector(".custom-carousel-track");
+  const slides = document.querySelectorAll(".custom-carousel-slide");
+  const prevButton = document.querySelector(".custom-prev");
+  const nextButton = document.querySelector(".custom-next");
+
+  let currentIndex = 0;
+
+  function updateCarousel() {
+  const gap = parseInt(getComputedStyle(track).gap || "20", 10);
+  const slideWidth = slides[0].getBoundingClientRect().width;
+  const offset = -(currentIndex * (slideWidth + gap));
+  track.style.transform = `translateX(${offset}px)`;
+  // Met à jour les points de pagination
+  document.querySelectorAll(".custom-dot").forEach((dot, index) => {
+  dot.classList.toggle("active", index === currentIndex);
+});
+
+}
+
+
+ nextButton.addEventListener("click", function () {
+  currentIndex = (currentIndex + 1) % slides.length;
+  updateCarousel();
+});
+
+prevButton.addEventListener("click", function () {
+  currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+  updateCarousel();
+});
+
+const dotsContainer = document.querySelector(".custom-carousel-dots");
+
+// Pagination 
+
+slides.forEach((_, index) => {
+  const dot = document.createElement("div");
+  dot.classList.add("custom-dot");
+  if (index === currentIndex) dot.classList.add("active");
+
+  dot.addEventListener("click", () => {
+    currentIndex = index;
+    updateCarousel();
+  });
+
+  dotsContainer.appendChild(dot);
+});
+
+
+// Swipe mobile
+ 
+let startX = 0;
+let isSwiping = false;
+
+track.addEventListener("touchstart", function (e) {
+  startX = e.touches[0].clientX;
+  isSwiping = true;
+});
+
+track.addEventListener("touchmove", function (e) {
+  if (!isSwiping) return;
+  const deltaX = e.touches[0].clientX - startX;
+
+  if (Math.abs(deltaX) > 50) {
+    if (deltaX < 0) {
+      currentIndex = (currentIndex + 1) % slides.length;
+    } else {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    }
+    updateCarousel();
+    isSwiping = false;
+    startX = e.touches[0].clientX; // reset point de départ
+  }
+});
+
+track.addEventListener("touchend", function () {
+  isSwiping = false;
+});
+
+
+
+
+  window.addEventListener("resize", updateCarousel);
+  updateCarousel(); // initialise le positionnement
+
   
   // Liste des formulaires à valider
   const formulaires = [

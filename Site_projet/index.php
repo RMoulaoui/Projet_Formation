@@ -9,7 +9,7 @@ error_reporting(0);
 <?php
 require_once __DIR__ . '/../config.php';
 
-$requete = $pdo->query("SELECT * FROM projets LIMIT 3");
+$requete = $pdo->query("SELECT * FROM projets LIMIT 10");
 $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -58,46 +58,46 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
 
       </section>
         
-        <div class="container row  text-center  justify-content-center mt-0  "  >           
+        <div class="d-flex flex-column align-items-center my-5">
 
+        <div class="container px-0">
+        
+        <div class="custom-carousel mx-auto">
 
-            <div class="col  "  >
-              
-              <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-touch="true" >
-                <div class="carousel-indicators">
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                  <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                </div>
-               <div class="carousel-inner">
-                  <?php foreach($projets as $index => $projet): ?>
-                    <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
-                      <img src="<?= htmlspecialchars($projet['image']) ?>" class="d-block mx-auto" style="width: 600px; height: 500px; object-fit: contain;" alt="<?= htmlspecialchars($projet['titre']) ?>">
-                    </div>
-                  <?php endforeach; ?>
-                </div>
-                <button class="carousel-control-prev " type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon  " aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-                  <span class="carousel-control-next-icon " aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
-              </div>
+        <button class="custom-prev">&#10094;</button>
 
+        <div class="custom-carousel-track">
+          <?php foreach ($projets as $projet): ?>
+            <div class="custom-carousel-slide">
+              <img src="<?= htmlspecialchars($projet['image']) ?>" alt="<?= htmlspecialchars($projet['titre']) ?>">
             </div>
-
-            <h2 class="projetsreal">Projets Réalisés</h2>
-            
-            <span class="mb-5 mt-4 "><a class="btncta1 " href="portfolio.php"  style="text-decoration: none">Voir nos préstations</a></span>
+          <?php endforeach; ?>
         </div>
 
-        <div class="secondfond container-fluid text-center p-4 " >
+        <button class="custom-next">&#10095;</button>
+      </div>
+      
+      <div class="custom-carousel-dots d-none d-sm-flex justify-content-center mt-3"></div>
+        </div>
 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d89608.42339768977!2d4.284067070562757!3d45.42419481215893!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5abff0dcfe415%3A0x631b2db87635756!2sSaint-%C3%89tienne!5e0!3m2!1sfr!2sfr!4v1743547428777!5m2!1sfr!2sfr"
+        <h2 class="mt-3 ">Projets Réalisés</h2>
+        <span class="mt-3">
+          <a class="btncta" href="portfolio.php" style="text-decoration: none">Voir nos préstations</a>
+        </span>
+
+      </div>
+
+
+        <div class=" secondfond section-carte container-fluid text-center p-4 " >
+
+            <h2 class="texte-clair">Où nous trouver ?</h2>
+            <address class="texte-clair">
+              14 Rue Paul et Pierre Guichard, 42000 Saint-Étienne
+            </address>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.4607971331534!2d4.386859076652695!3d45.46052073368363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5ac72b5162507%3A0x8082a74595924a0a!2sStade%20Geoffroy-Guichard!5e0!3m2!1sfr!2sfr!4v1753727090328!5m2!1sfr!2sfr"
                     height="400px"
-                    style="border: 3px solid #F4EDE4; max-width: 90%;margin: 25px; border-radius: 15px;" 
+                    style="border: 3px solid #F4EDE4; max-width: 90%;margin: 25px; border-radius: 15px; padding : 5px;" 
                     allowfullscreen="" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade"
@@ -110,59 +110,15 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
         <div class="container-fluid row text-center p-5 justify-content-center" >
           
           
-            <div class="col-sm-8">
-              <h2 id="contact" class="mb-3">Contactez-nous</h2>
+            <div class="col-sm-8 text-center">
+              <h2 id="contact" class="mb-3">Un projet ? Une question ?</h2>
               <p class="lead mb-5">
-                Pour une demande, un devis ou un rendez-vous.
+                Pour toute demande ou devis, nous vous invitons à utiliser notre formulaire dédié.
               </p>
+              <a href="contact.php" class="btncta">Nous contacter</a>
             </div>
-          
-            <form id="form-index" class="col-sm-8" style="width: 65%" action="traitement.php" method="POST">
-              
-              <div class="mb-3">
-                <label class="form-label fw-bold">Vous êtes :</label><br>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="statut" id="particulier" value="Particulier" required>
-                  <label class="form-check-label" for="particulier">Particulier</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="statut" id="professionnel" value="Professionnel" required>
-                  <label class="form-check-label" for="professionnel">Professionnel</label>
-                </div>
-              </div>
-  
-              <div class="row">
 
-                <div class="col  mb-3 ">                  
-                  <input type="text" name="prenom" pattern="^[A-Za-zÀ-ÿ' -]+$" maxlength="40" title="Seules les lettres, accents, espaces, tirets ou apostrophes sont autorisés." class="form-control inform"  placeholder="Prénom" required>                               
-                </div>
 
-                <div class="col  mb-3">                  
-                  <input type="text" name="nom"  pattern="^[A-Za-zÀ-ÿ' -]+$" maxlength="40" title="Seules les lettres, accents, espaces, tirets ou apostrophes sont autorisés." class="form-control inform"  placeholder="Nom" required>                  
-                </div>
-
-              </div>
-              
-              <div class="mb-3 ">                
-                <input type="email" name="email" class="form-control inform"  placeholder="Adresse email" required>                
-              </div>
-              
-              <div class="mb-3">
-                <textarea name="message" maxlength="1000" class="form-control inform"  rows="6" placeholder="Votre message..." required></textarea>                            
-              </div>
-              
-              <div class="form-check text-start mt-3">
-                <input class="form-check-input" type="checkbox" id="rgpd" required>
-                <label class="form-check-label small" for="rgpd">
-                  J’accepte que mes données soient utilisées pour être contacté(e) dans le cadre de ma demande. <a href="politique.html" target="_blank" class="text-decoration-underline">Voir notre politique de confidentialité</a>.
-                </label>
-              </div>
-
-              <div>
-                <button class="btncta mt-3"  type="submit">Envoyer</button>
-              </div>
-              
-            </form>
           
 
         </div>

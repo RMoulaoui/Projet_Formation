@@ -32,23 +32,13 @@
 
       <div class="blocprincipal d-flex  flex-grow-1 g-0 m-0">
           
-        <div class="carte d-flex col-12 col-sm-6 justify-content-center align-items-center  fondcontact order-sm-1 order-2" >
-            <div class="container text-center justify-content-center ">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5596.921601669106!2d4.384563090882438!3d45.460520659109584!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5ac72b5162507%3A0x8082a74595924a0a!2sStade%20Geoffroy-Guichard!5e0!3m2!1sfr!2sfr!4v1743540316581!5m2!1sfr!2sfr" 
-                    height="450"
-                    style="border: 5px solid rgb(245, 238, 230); padding: 4px; border-radius: 30px;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
+       
         
         
         <div class="formulaire d-flex flex-column col-12 col-sm-6 text-center justify-content-center order-sm-2 order-1 "  >
             
                 <div class="col-sm-8">
-                  <h1 id="contact" class="mb-3">Contactez-nous</h1>
+                  <h1 id="contact" class="my-3">Contactez-nous</h1>
                   <p class="lead mb-5">
                     Pour une demande, un devis ou un rendez-vous.
                   </p>
@@ -89,12 +79,12 @@
                 <div class="form-check text-start mt-3">
                   <input class="form-check-input" type="checkbox" id="rgpd" required>
                   <label class="form-check-label small" for="rgpd">
-                    J’accepte que mes données soient utilisées pour être contacté(e) dans le cadre de ma demande. <a href="politique.html" target="_blank" class="text-decoration-underline">Voir notre politique de confidentialité</a>.
+                    J’accepte que mes données soient utilisées pour être contacté(e) dans le cadre de ma demande. <a href="politique.php" target="_blank" class="text-decoration-underline">Voir notre politique de confidentialité</a>.
                   </label>
                 </div>
 
                 <div class="text-center">
-                    <button type="submit" class="btncta my-3">Envoyer</button>
+                    <button type="submit" class="btncta mt-3">Envoyer</button>
                 </div>
               </form>
 
