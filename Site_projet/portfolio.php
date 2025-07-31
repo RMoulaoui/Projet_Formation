@@ -72,7 +72,7 @@ $projets = $stmt->fetchAll();
 
             <?php if (count($projets) > 6): ?>
 
-              <div class="col-12 mb-3">
+              <div class="col-12 mb-5">
                 <button class="voirplus btncta">
                   <i class="fi fi-tr-angle-circle-down"></i> Voir plus...
                 </button>

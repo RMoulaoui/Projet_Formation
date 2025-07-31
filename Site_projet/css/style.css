@@ -21,45 +21,31 @@ html, body {
     color: #F4EDE4;
     width: 100%;
 }
-.secondfond .texte-clair {
-    color: #F4EDE4 !important;
-}
+
 
 
 
 h1{
     color: rgb(30, 58, 95);
 }
+
 h2{
     color: #1E3A5F; 
 }
 
-
+.secondfond h2{
+  color: #F4EDE4;
+}
 
 h4{
-    -webkit-text-stroke: 0.2px #F4EDE4 ;
-    font-weight: bold;
-    text-shadow: 1px 1px white; 
-}
-
-.display-3{
-    color: #1E3A5F;
-}
-
-.container p{
-    color: #232323;
-}
-
-.texte-clair{
-    color: rgb(245, 238, 230);
+  font-weight:600;
 }
 
 
 
-iframe{
-    width: 60%; 
-    
-}
+
+
+
 
 #quisommesnous {
   padding-top: 4rem;
@@ -74,9 +60,6 @@ iframe{
 
 @media (max-width: 576px) {
   
-  .fondcontact {
-    height: 50vh;
-  }
  
   #titreAccueil{
     margin-bottom: 1rem !important; 
@@ -90,12 +73,6 @@ iframe{
 }
 
 
-  body.accueil .secondfond iframe {
-    width: 90%;
-    height: 100%;
-    min-height: 350px;
-  }
-
     body.accueil form {
     width: 100% !important;
     max-width: none;
@@ -106,17 +83,18 @@ iframe{
     width: 100%;
   }
 
-  #quisommesnous{
-    padding-top: 1rem ;
-    padding-bottom: 2rem;
-}
+ 
 .section-carte {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
   }
+
+
+  
 }
+
 
 
 /* Menu */
@@ -130,11 +108,6 @@ header{
     align-items:baseline;
     width: 100%;
 
-}
-
-.nav-disabled {
-    color: grey !important;
-    pointer-events: none;
 }
 
 .text-decoration-underline:hover {
@@ -161,7 +134,80 @@ header{
 
 
 
-/* Accueil Caroussel */  
+ /* Accueil  */
+
+/*  HERO  */
+
+#hero {
+  background: url('../images/projets/Projet10.jpg') center/cover no-repeat;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+#hero h1,
+#hero p {
+  text-shadow: 2px 2px 8px #F4EDE4;
+}
+
+#details-projet {
+  background-color: #F4EDE4;
+  color: #232323;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;    
+  justify-content: center;
+  text-align: center;     
+  padding: 1rem;          
+  min-height: 80vh;  
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #1E3A5F;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.close-btn:hover {
+  transform: scale(1.2);
+  font-weight: bold;
+}
+
+
+
+
+@media (max-width: 576px) {
+  #hero {
+    min-height: 60vh;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  
+  .avis-clients-row {
+    display: flex;
+    flex-direction: column !important;
+    align-items: center;
+  }
+  
+  .avis-clients-row > [class*="col-"] {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+
+
+
+
+/* Caroussel */
 
 .custom-carousel {
   position: relative;
@@ -340,29 +386,19 @@ header{
   flex-direction: column;
 }
 
+.contact-page .formulaire {
+  align-items: center; /* centre horizontalement tous les enfants */
+  text-align: center;  /* centre le texte */
+}
+
 .blocprincipal {
   display: flex;
   flex-direction: row;
+  justify-content: center;  /* centre horizontalement */
+  align-items: center;      /* centre verticalement */
+  min-height: 80vh;
   
-  
 }
-
-.fondcontact{
-    background: linear-gradient(to top,#14263d,#1E3A5F);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-      
-}
-
-.fondcontact,
-.formulaire {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 
 
 .formulaire form {
@@ -376,15 +412,7 @@ header{
     flex-direction: column !important;
   }
 
-  .fondcontact {
-    width: 100%;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-  }
-
+ 
   .formulaire {
     width: 100%;
     flex: none;
@@ -394,10 +422,6 @@ header{
     padding: 1rem;
   }
 
-  iframe {
-    width: 90%;
-    
-  }
   
   .formulaire form {
     width: 90%;
@@ -418,8 +442,41 @@ header{
  
 }
 
+/* Footer */
 
+footer h5 {
+  font-size: 1.1rem;
+}
 
+footer a {
+  transition: opacity 0.2s ease-in-out;
+}
+
+footer a:hover {
+  opacity: 0.8;
+}
+
+footer iframe {
+  border-radius: 6px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 150px !important;  
+  border: 0;
+  border-radius: 6px;
+}
+
+footer .btn-outline-light {
+  border-radius: 4px;
+  padding: 0.25rem 0.6rem;
+}
+
+@media (max-width: 576px) {
+  .map-container iframe {
+    height: 120px;
+  }
+}
 
 
 
@@ -455,28 +512,15 @@ header{
     text-decoration: none;
 }
 
-.btncta1{
-    background-color: #1E3A5F;
-    color:#F4EDE4;
-    padding: 8px 20px;
-    border-radius: 15px;
-    transition: 0.1s;
-    text-decoration: none;
-}
-
 .btncta:hover{
     font-weight: bold;
 }
-.btncta1:hover{
-    font-weight: bold;
 
-}
 
 
 /* COuleur site */
 
 /* Couleur principale : Bleu pétrole (#1E3A5F)
-Couleur secondaire : Ocre doré (#C7923E)
-Couleur d’accent : Rouge terracotta (#B04A33)
-Fond neutre : Beige clair (#F4EDE4)
+Couleur secondaire : Beige clair (#F4EDE4)
+Couleur CTA : Ocre doré (#C7923E)
 Texte et contrastes : Anthracite profond (#232323) */

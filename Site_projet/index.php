@@ -39,21 +39,56 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
       include 'header.php';
     ?>
 
+    
+
+
     <!-- Contenu -->
 
     <main>
      
     
+      <!-- HERO -->
+      <section id="hero" class="hero-section ">
+        <div class="container text-center">
+          <h1 class="fw-bold mb-3">Projet phare : Fresque murale</h1>
+          <p class="lead ">Une réalisation unique au cœur de Saint-Étienne</p>
+          <button id="btn-voir-projet" class="btncta mt-3">Découvrir le projet</button>
+        </div>
+      </section>
+
+      <!-- Détails du projet (caché par défaut) -->
+      <section id="details-projet" class="details-section d-none position-relative">
+        
+        <button id="btn-fermer-projet" class="close-btn" aria-label="Fermer">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      
+        <div class="container py-3">
+          <h2 class="fw-bold">Rencontre au café</h2>
+          <p>
+            Ce mural coloré capture un moment suspendu dans le temps : deux personnages se croisent, portés par le vent, autour d’un café en terrasse. Les formes géométriques et les couleurs vives créent une atmosphère à la fois urbaine et chaleureuse, invitant le spectateur à imaginer leur histoire. 
+          </p>
+          <img src="images/projets/Projet10.jpg" alt="Fresque murale" class="img-fluid rounded shadow m-2">
+          <p>Les habitants peuvent admirer cette œuvre unique depuis 2025, symbole de créativité et de modernité.</p>
+        </div>
+
+      </section>
+
+    
+    
       <div class="d-flex flex-column align-items-center  ">
 
-      <section id="quisommesnous"  class=" text-center m-0 pb-3">
+      <section id="quisommesnous"  class="secondfond text-center m-0 ">
 
-        <div class="container-fluid col-md-10 col-lg-8 ">
-          <h2 class="mb-4 display-5 texte-clair">Qui sommes-nous ?</h2>
-          <p class="fw-bold texte-clair">
+        <div class=" container-fluid col-md-10 col-lg-8 ">
+          <h2 class="mb-4  ">Qui sommes-nous ?</h2>
+          <p class="fw-bold  pb-3">
             Chez Decopaint, nous transformons les murs en véritables œuvres d’art. 
             Spécialisés dans les fresques murales personnalisées, nous intervenons pour les particuliers comme pour les professionnels à la recherche d’une décoration unique et expressive.
           </p>
+          <a href="quisommesnous.php" class="btncta" style="text-decoration: none;">
+            En savoir plus
+          </a>
         </div>
 
       </section>
@@ -88,23 +123,47 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
       </div>
 
 
-        <div class=" secondfond section-carte container-fluid text-center p-4 " >
+        <section id="avis-clients" class="secondfond py-5">
+          <div class="container">
+            <h2 class="text-center mb-4 ">Avis Clients</h2>
+            
+            <div class="row avis-clients-row g-4">
 
-            <h2 class="texte-clair">Où nous trouver ?</h2>
-            <address class="texte-clair">
-              14 Rue Paul et Pierre Guichard, 42000 Saint-Étienne
-            </address>
+              <div class="col-md-4">
+                <div class="card avis-card h-100 p-3 shadow-sm">
+                  <img src="https://i.pravatar.cc/60?img=12" class="client-photo rounded-circle mx-auto mb-3" alt="Jean Dupont">
+                  <p class="mb-2 text-warning">⭐⭐⭐⭐⭐</p>
+                  <p class="mb-3">"Super travail, très professionnel, je recommande vivement."</p>
+                  <small class="text-muted">- Jean Dupont</small>
+                </div>
+              </div>
 
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.4607971331534!2d4.386859076652695!3d45.46052073368363!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f5ac72b5162507%3A0x8082a74595924a0a!2sStade%20Geoffroy-Guichard!5e0!3m2!1sfr!2sfr!4v1753727090328!5m2!1sfr!2sfr"
-                    height="400px"
-                    style="border: 3px solid #F4EDE4; max-width: 90%;margin: 25px; border-radius: 15px; padding : 5px;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade"
-                    >
-            </iframe>
-          
-        </div>
+              <div class="col-md-4">
+                <div class="card avis-card h-100 p-3 shadow-sm">
+                  <img src="https://i.pravatar.cc/60?img=10" class="client-photo rounded-circle mx-auto mb-3" alt="Marie Durand">
+                  <p class="mb-2 text-warning">⭐⭐⭐⭐⭐</p>
+                  <p class="mb-3">"Équipe réactive et à l’écoute, le résultat est parfait."</p>
+                  <small class="text-muted">- Marie Durand</small>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="card avis-card h-100 p-3 shadow-sm">
+                  <img src="https://i.pravatar.cc/60?img=14" class="client-photo rounded-circle mx-auto mb-3" alt="Paul Martin">
+                  <p class="mb-2 text-warning">⭐⭐⭐⭐⭐</p>
+                  <p class="mb-3">"Travail rapide et soigné, je suis très satisfait."</p>
+                  <small class="text-muted">- Paul Martin</small>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+
+
+
+
         
         
         <div class="container-fluid row text-center p-5 justify-content-center" >

@@ -1,6 +1,22 @@
 $(document).ready(function(){
     
-         
+    // Ouvrir la section cachée 
+    $("#btn-voir-projet").on("click", function () {
+        $("#details-projet")
+            .hide()
+            .removeClass("d-none")
+            .fadeIn(400, function () {
+                this.scrollIntoView({ behavior: "smooth" });
+            });
+    }); 
+
+    // Fermer la section projet 
+    $("#btn-fermer-projet").on("click", function () {
+        $("#details-projet").fadeOut(300, function () {
+            $(this).addClass("d-none");
+        });
+        $("html, body").animate({ scrollTop: 0 }, 300);
+    });
    
     // Bouton UP
     
@@ -77,8 +93,6 @@ $(document).ready(function(){
         });
         
     });
-
-
      
     
 });
@@ -178,8 +192,7 @@ track.addEventListener("touchend", function () {
   // Liste des formulaires à valider
   const formulaires = [
     document.getElementById("form-contact"),
-    document.getElementById("form-index")
-  ];
+    ];
 
   formulaires.forEach((formulaire) => {
     if (!formulaire) return;
@@ -215,4 +228,7 @@ track.addEventListener("touchend", function () {
       }
     });
   });
+
+
+    
 });

@@ -21,6 +21,11 @@
       <i class="bi bi-book-half m-2"></i>Portfolio
     </a>
   </li>
+  <li class="list-item mx-2 p-sm-0">
+    <a href="quisommesnous.php" class="link-light <?= $page === 'quisommesnous' ? 'fw-bold text-decoration-none' : '' ?>">
+      <i class="bi bi-people-fill m-2"></i>À propos
+    </a>
+  </li>
   <li class="list-item mx-2 pb-2 p-sm-0">
     <a href="contact.php" class="link-light <?= $page === 'contact' ? 'fw-bold text-decoration-none' : '' ?>">
       <i class="bi bi-envelope-at-fill m-2"></i>Contact
@@ -59,6 +64,11 @@
       <li class="mb-3">
         <a href="portfolio.php" class="text-white <?= $page === 'portfolio' ? 'fw-bold text-decoration-none' : '' ?>">
           <i class="bi bi-book-half me-2"></i>Portfolio
+        </a>
+      </li>
+      <li class="mb-3">
+        <a href="quisommesnous.php" class="text-white <?= $page === 'quisommesnous' ? 'fw-bold text-decoration-none' : '' ?>">
+          <i class="bi bi-people-fill me-2"></i>À propos
         </a>
       </li>
       <li>
