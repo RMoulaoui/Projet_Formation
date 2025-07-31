@@ -25,8 +25,10 @@ if (!$prenom || !$nom || !$email || !$message) {
 }
 
 if (!preg_match("/^[A-Za-zÀ-ÿ \-']+$/", $prenom) || !preg_match("/^[A-Za-zÀ-ÿ \-']+$/", $nom)) {
-    die("Erreur : Le prénom ou le nom contient des caractères non autorisés.");
+    header("Location: contact.php?error=nomprenom");
+    exit();
 }
+
 
 try {
     $mail = new PHPMailer(true);
@@ -66,7 +68,7 @@ try {
 
 
     $mail->send();
-    header("Location: merci.html");
+    header("Location: merci.php");
     exit();
 
 } catch (Exception $e) {

@@ -206,21 +206,20 @@ track.addEventListener("touchend", function () {
       const regexNomPrenom = /^[A-Za-zÀ-ÿ \-']+$/;
       const erreurs = [];
 
-      if (!regexNomPrenom.test(prenom)) {
-        erreurs.push("Prénom invalide.");
-      }
+      // Vérifie si un champ est vide
+    if (!prenom || !nom || !email || !message) {
+      erreurs.push("Veuillez remplir tous les champs obligatoires.");
+    } else {
+      // Validation du prénom et nom
+      if (!regexNomPrenom.test(prenom)) erreurs.push("Prénom invalide.");
+      if (!regexNomPrenom.test(nom)) erreurs.push("Nom invalide.");
 
-      if (!regexNomPrenom.test(nom)) {
-        erreurs.push("Nom invalide.");
-      }
+      // Validation email
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) erreurs.push("Email invalide.");
 
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        erreurs.push("Email invalide.");
-      }
-
-      if (message.length < 5) {
-        erreurs.push("Message trop court.");
-      }
+      // Validation message
+      if (message.length < 5) erreurs.push("Message trop court.");
+    }
 
       if (erreurs.length > 0) {
         e.preventDefault();

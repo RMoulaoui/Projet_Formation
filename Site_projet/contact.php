@@ -20,7 +20,7 @@
   
   <body class="contact-page">
 
-    <div class="main-content ">
+    
 
     <!-- Header -->
     <?php
@@ -30,10 +30,9 @@
       
     <!-- Contenu -->
 
-      <div class="blocprincipal d-flex  flex-grow-1 g-0 m-0">
-          
+             
        
-        
+        <main>
         
         <div class="formulaire d-flex flex-column col-12 col-sm-6 text-center justify-content-center order-sm-2 order-1 "  >
             
@@ -43,8 +42,16 @@
                     Pour une demande, un devis ou un rendez-vous.
                   </p>
                 </div>
+              
+                
 
               <form id="form-contact" class="mx-auto col-12 col-sm-10 col-md-6 px-3" style="max-width: 600px;" action="traitement.php" method="POST" >
+                <?php if (isset($_GET['error']) && $_GET['error'] === 'nomprenom'): ?>
+                    <div class="alert alert-danger small mt-2">
+                        Le prénom ou le nom contient des caractères non autorisés.
+                    </div>
+                <?php endif; ?>
+
                 
                 <div class="mb-3">
                   <label class="form-label fw-bold">Vous êtes :</label><br>
@@ -73,7 +80,7 @@
                 </div>
 
                 <div class="mb-3">
-                    <textarea name="message" class="form-control inform" placeholder="Votre message..." rows="6" maxlength="1000" required></textarea>
+                    <textarea name="message" class="form-control inform" placeholder="Votre message..." rows="6" minlength="5" maxlength="1000" required></textarea>
                 </div>
 
                 <div class="form-check text-start mt-3">
@@ -89,13 +96,11 @@
               </form>
 
             
-        </div>       
+        </div>    
+        
+        </main>
     
     
-      </div>
-      
-
-    </div>
     
     <!-- Footer -->
 

@@ -10,11 +10,7 @@ html, body {
 }
 
 
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+
 
 .secondfond{
     background: linear-gradient(to top,#14263d,#1E3A5F);
@@ -381,6 +377,16 @@ header{
 
 /* Page contact */
 
+
+body.contact-page main {
+  flex: 1; 
+  display: flex;
+  align-items: center; 
+  justify-content: center; 
+  padding: 2rem 0; 
+}
+
+
 .contact-page {
   display: flex;
   flex-direction: column;
@@ -391,16 +397,6 @@ header{
   text-align: center;  /* centre le texte */
 }
 
-.blocprincipal {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;  /* centre horizontalement */
-  align-items: center;      /* centre verticalement */
-  min-height: 80vh;
-  
-}
-
-
 .formulaire form {
   width: 100%;
  
@@ -408,9 +404,7 @@ header{
 
 
 @media (max-width: 576px) {
-  .blocprincipal {
-    flex-direction: column !important;
-  }
+  
 
  
   .formulaire {
@@ -512,6 +506,14 @@ footer .btn-outline-light {
     text-decoration: none;
 }
 
+.btncta1{
+    background-color: #1E3A5F;
+    color:#F4EDE4;    
+    padding: 8px 20px;
+    border-radius: 15px;
+    transition: 0.1s;
+    text-decoration: none;
+}
 .btncta:hover{
     font-weight: bold;
 }
