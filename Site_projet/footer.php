@@ -23,6 +23,9 @@
       <a href="tel:+33412345678" class="text-white text-decoration-none">+33 4 12 34 56 78</a>
     </p>
     <p>
+      <a href="mailto:contact@decopaint.fr" class="text-white text-decoration-none">contact@decopaint.fr</a>
+    </p>
+    <p>
       <a href="contact.php" class="btn btn-outline-light btn-sm mt-2">Formulaire de contact</a>
     </p>
   </div>
