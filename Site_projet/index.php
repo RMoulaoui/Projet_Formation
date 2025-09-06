@@ -123,7 +123,7 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
 
                     <div class="row avis-clients-row g-4">
 
-                        <div class="col-md-4">
+                        <div class="col-12  col-lg-4">
                             <div class="card avis-card h-100 p-3 shadow-sm">
                                 <img src="https://i.pravatar.cc/60?img=12" class="client-photo rounded-circle mx-auto mb-3" alt="Jean Dupont">
                                 <p class="mb-2 text-warning">⭐⭐⭐⭐⭐</p>
@@ -132,7 +132,7 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-12  col-lg-4">
                             <div class="card avis-card h-100 p-3 shadow-sm">
                                 <img src="https://i.pravatar.cc/60?img=10" class="client-photo rounded-circle mx-auto mb-3" alt="Marie Durand">
                                 <p class="mb-2 text-warning">⭐⭐⭐⭐⭐</p>
@@ -141,7 +141,7 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-12  col-lg-4">
                             <div class="card avis-card h-100 p-3 shadow-sm">
                                 <img src="https://i.pravatar.cc/60?img=14" class="client-photo rounded-circle mx-auto mb-3" alt="Paul Martin">
                                 <p class="mb-2 text-warning">⭐⭐⭐⭐⭐</p>

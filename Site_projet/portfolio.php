@@ -28,6 +28,8 @@ $projets = $stmt->fetchAll();
 
 <body>
 
+    <!-- Header -->
+     
      <?php
     $page = 'portfolio'; 
     include 'header.php';
@@ -35,9 +37,7 @@ $projets = $stmt->fetchAll();
     
     <div class="main-content">
 
-        <!-- Header -->
-
-   
+          
 
         <!-- Contenu -->
 
@@ -53,13 +53,18 @@ $projets = $stmt->fetchAll();
 
                     <?php foreach ($projets as $projet): ?>
                     <?php
-                $i++;
-                $classe = 'col m-3 p-0 fw-bold';
-                if ($i > 6) $classe .= ' suiteportfo';
-              ?>
+                        $i++;
+                        $classe = 'col m-3 p-0 fw-bold';
+                        if ($i > 6) $classe .= ' suiteportfo';
+                    ?>
 
                     <div class="<?= $classe ?>">
-                        <img class="zoom imgportfo mb-1" src="<?= htmlspecialchars($projet['image']) ?>" alt="<?= htmlspecialchars($projet['titre']) ?>" data-bs-toggle="modal" data-bs-target="#Modal" data-index="<?= $i - 1 ?>">
+                        <img class="zoom imgportfo mb-1" 
+                            src="<?= htmlspecialchars($projet['image']) ?>" 
+                            alt="<?= htmlspecialchars($projet['titre']) ?>" 
+                            data-bs-toggle="modal" 
+                            data-bs-target="#Modal" 
+                            data-index="<?= $i - 1 ?>">
                         <p><?= htmlspecialchars($projet['titre']) ?></p>
                     </div>
 
@@ -126,8 +131,8 @@ $projets = $stmt->fetchAll();
                     </div>
                 </div>
             </div>
-    </div>
     </main>
+    </div>
 
     <!-- Footer -->
 

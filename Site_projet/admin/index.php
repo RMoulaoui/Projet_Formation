@@ -141,7 +141,7 @@ $nbPages = ceil($total / $limite);
         <a href="ajouter.php" class="btnajout">+ Ajouter un projet</a>
         <div class="d-flex gap-2">
             <a href="../index.php" class="btn btn-outline-dark">
-                <i class="bi bi-house-fill"></i> Accueil
+                 Accueil
             </a>
             <a href="logout.php" class="btn btn-outline-dark">Déconnexion</a>
         </div>

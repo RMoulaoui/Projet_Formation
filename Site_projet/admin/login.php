@@ -1,6 +1,8 @@
 <?php ini_set('display_errors', 0);
 
-
+if (session_status() !== PHP_SESSION_ACTIVE) {
+    session_start();
+}
 
 require_once __DIR__ . '/../../envloader.php';
 
@@ -92,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
     <a href="../index.php" class="btn-retour-admin">
-        <i class="bi bi-house-fill"></i> Accueil
+         Accueil
     </a>
 
 
