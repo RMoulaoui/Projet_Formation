@@ -143,7 +143,7 @@ header{
   padding: 2rem;
 }
 
-#hero h1,
+#hero h2,
 #hero p {
   text-shadow: 2px 2px 8px #F4EDE4;
 }

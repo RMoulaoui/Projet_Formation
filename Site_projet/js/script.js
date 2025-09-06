@@ -51,8 +51,7 @@ $(document).ready(function(){
 
     $('.suiteportfo').hide();
 
-   
-    // Bouton pour Montrer/Cacher "Images Cachées"
+   // Bouton pour Montrer/Cacher "Images Cachées"
     
     function afficherPhotos() {
         $(".suiteportfo").fadeIn(2000); 
@@ -103,7 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   //Caroussel page d'accueil
 
-
   const track = document.querySelector(".custom-carousel-track");
   const slides = document.querySelectorAll(".custom-carousel-slide");
   const prevButton = document.querySelector(".custom-prev");
@@ -120,9 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll(".custom-dot").forEach((dot, index) => {
   dot.classList.toggle("active", index === currentIndex);
 });
-
 }
-
 
  nextButton.addEventListener("click", function () {
   currentIndex = (currentIndex + 1) % slides.length;
@@ -202,7 +198,6 @@ track.addEventListener("touchend", function () {
       const nom = formulaire.querySelector('[name="nom"]').value.trim();
       const email = formulaire.querySelector('[name="email"]').value.trim();
       const message = formulaire.querySelector('[name="message"]').value.trim();
-
       const regexNomPrenom = /^[A-Za-zÀ-ÿ \-']+$/;
       const erreurs = [];
 
