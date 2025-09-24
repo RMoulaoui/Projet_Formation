@@ -73,7 +73,7 @@
 
                 <h2>Éditeur du site</h2>
                 <p><strong>Nom du site :</strong> Decopaint<br>
-                    <strong>Responsable de publication :</strong> Moulaoui Ryan<br>
+                    <strong>Responsable de publication :</strong> Moulaoui.R<br>
                     <strong>Adresse :</strong> 14 Rue Paul et Pierre Guichard 42000 Saint-Etienne<br>
                     <strong>Email :</strong> contact@decopaint.fr
                 </p>

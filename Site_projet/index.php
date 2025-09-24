@@ -5,7 +5,7 @@ error_reporting(0);
 <?php
 require_once __DIR__ . '/../config.php';
 
-$requete = $pdo->query("SELECT * FROM projets LIMIT 10");
+$requete = $pdo->query("SELECT * FROM projets ORDER BY id DESC LIMIT 10");
 $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
@@ -63,7 +63,7 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
                 <p>
                     Ce mural coloré capture un moment suspendu dans le temps : deux personnages se croisent, portés par le vent, autour d’un café en terrasse. Les formes géométriques et les couleurs vives créent une atmosphère à la fois urbaine et chaleureuse, invitant le spectateur à imaginer leur histoire.
                 </p>
-                <img src="images/projets/Projet10.jpg" alt="Fresque murale" class="img-fluid rounded shadow m-2">
+                <img src="images/projets/projet-8.jpg" alt="Fresque murale" class="img-fluid rounded shadow m-2">
                 <p>Les habitants peuvent admirer cette œuvre unique depuis 2025, symbole de créativité et de modernité.</p>
             </div>
 
@@ -90,7 +90,7 @@ $projets = $requete->fetchAll(PDO::FETCH_ASSOC);
             <div class="d-flex flex-column align-items-center my-5">
 
                 <div class="container px-0">
-
+ 
                     <div class="custom-carousel mx-auto">
 
                         <button class="custom-prev">&#10094;</button>

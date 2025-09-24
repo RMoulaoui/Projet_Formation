@@ -1,4 +1,9 @@
-<?php ini_set('display_errors', 0); ?>
+<?php
+ini_set('display_errors', 0);
+require_once __DIR__ . '/../envloader.php';
+$env = charger_env(); 
+?>
+
 
 <!doctype html>
 
@@ -36,7 +41,7 @@
 
             <div class="col-sm-8">
                 <h1 id="contact" class="my-3">Contactez-nous</h1>
-                <p class="lead mb-5">
+                <p class="lead mb-5 p-3">
                     Pour une demande, un devis ou un rendez-vous.
                 </p>
             </div>
@@ -48,6 +53,19 @@
                     Le prénom ou le nom contient des caractères non autorisés.
                 </div>
                 <?php endif; ?>
+                <?php if (isset($_GET['error']) && $_GET['error'] === 'captcha'): ?>
+                <div class="alert alert-danger small mt-2">
+                    Échec de vérification du captcha. Merci de cocher “Je ne suis pas un robot”.
+                </div>
+                <?php endif; ?>
+
+                <!-- Honeypot anti-bot (ne pas supprimer le name="website") -->
+                <div class="d-none" aria-hidden="true">
+                <label for="website">Votre site (laissez vide)</label>
+                <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                </div>
+
+
 
 
                 <div class="mb-3">
@@ -81,12 +99,17 @@
                 </div>
 
                 <div class="form-check text-start mt-3">
-                    <input class="form-check-input" type="checkbox" id="rgpd" required>
+                    <input class="form-check-input" type="checkbox" id="rgpd" name="rgpd" required>
                     <label class="form-check-label small" for="rgpd">
                         J’accepte que mes données soient utilisées pour être contacté(e) dans le cadre de ma demande. <a href="politique.php" target="_blank" class="text-decoration-underline">Voir notre politique de confidentialité</a>.
                     </label>
                 </div>
+                
+                <div class="mb-3">
+                <div class="g-recaptcha" data-sitekey="<?= htmlspecialchars($env['RECAPTCHA_SITE_KEY'] ?? '') ?>"></div>
+                <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+    
                 <div class="text-center">
                     <button type="submit" class="btncta mt-3">Envoyer</button>
                 </div>

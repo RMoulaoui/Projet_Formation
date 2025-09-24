@@ -68,6 +68,7 @@ header{
 }
 
 .menu1{
+    display: flex;  
     color: white;
     align-items:baseline;
     width: 100%;
@@ -103,7 +104,7 @@ header{
 /*  HERO  */
 
 #hero {
-  background: url('../images/projets/Projet10.jpg') center/cover no-repeat;
+  background: url('../images/projets/projet-8.jpg') center/cover no-repeat;
   min-height: 60vh;
   display: flex; 
   align-items: center; 
@@ -248,22 +249,11 @@ header{
 
 @media (min-width: 576px) {
   
-  .custom-carousel-slide {
-  flex: 0 0 90%;
-  }
-
   
   .custom-carousel {
   max-width: 100%;
   width: 80%; 
   padding: 0;
-  }
-
-  .custom-carousel-dots {
-    display: flex !important; 
-    justify-content: center;
-    margin-top: 8px;
-    gap: 5px;
   }
  
   .custom-dot {
@@ -299,7 +289,7 @@ header{
    
  
 #Modal{
-    background-color: rgb(0, 0, 0, 0.7) ;
+    background-color: rgba(0, 0, 0, 0.7) ;
     
 }
 

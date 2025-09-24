@@ -47,7 +47,7 @@
                         </p>
                     </div>
                     <div class="col-md-6 text-center">
-                        <img src="images/projets/Projet2.jpg" alt="Fresque murale" class="img-fluid rounded shadow">
+                        <img src="images/projets/projet-2.jpg" alt="Fresque murale" class="img-fluid rounded shadow">
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         </p>
                     </div>
                     <div class="col-md-6 text-center">
-                        <img src="images/projets/Projet5.jpg" alt="Atelier Decopaint" class="img-fluid rounded shadow">
+                        <img src="images/projets/projet-5.jpg" alt="Atelier Decopaint" class="img-fluid rounded shadow">
                     </div>
                 </div>
             </div>

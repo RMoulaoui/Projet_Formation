@@ -1,15 +1,11 @@
-<?php ini_set('display_errors', 0);
-
-
-session_start();
-if (!isset($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== true) {
-    header('Location: login.php');
-    exit();
-}
-?>
-
 <?php
-require_once(__DIR__ . '/../../config.php');
+require_once __DIR__ . '/_session.php';
+
+if (empty($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== true) {
+    header('Location: login.php'); exit;
+}
+require_once __DIR__ . '/../../config.php';
+
 
 
 // Nombre de projets par page
@@ -176,14 +172,21 @@ $nbPages = ceil($total / $limite);
                         $cheminImage = '../' . $cheminImage;
                         }
                     ?>
-                        <img src="<?= htmlspecialchars($cheminImage) ?>" alt="Image" style="width: 100px;" class="img-thumbnail">
+                        <img src="<?= htmlspecialchars($cheminImage, ENT_QUOTES) ?>"
+                        alt="<?= htmlspecialchars($projet['titre'], ENT_QUOTES) ?>"
+                        width="100" height="auto" class="img-thumbnail">
+
                     </td>
-                    <td><?= htmlspecialchars($projet['titre']) ?></td>
-                    <td style="max-width: 300px;"><?= nl2br(htmlspecialchars($projet['description'])) ?></td>
+                    <td><?= htmlspecialchars($projet['titre'], ENT_QUOTES) ?></td>
+                    <td style="max-width: 300px;"><?= nl2br(htmlspecialchars($projet['description'], ENT_QUOTES)) ?></td>
                     <td class="text-center align-middle" style="white-space: nowrap;">
                         <div class="d-flex justify-content-center gap-2">
                             <a href="modifier.php?id=<?= $projet['id'] ?>" class="btn btn-primary btn-sm">Modifier</a>
-                            <a href="supprimer.php?id=<?= $projet['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Supprimer ce projet ?')">Supprimer</a>
+                            <form method="GET" action="confirmer_suppression.php" style="display:inline">
+                            <input type="hidden" name="id" value="<?= (int)$projet['id'] ?>">
+                            <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+
                         </div>
                     </td>
                 </tr>

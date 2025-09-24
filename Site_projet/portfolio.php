@@ -117,7 +117,6 @@ $projets = $stmt->fetchAll();
                                     <?php foreach ($projets as $index => $projet): ?>
                                     <div class="carousel-item <?= $index === 0 ? 'active' : '' ?>">
                                         <img src="<?= htmlspecialchars($projet['image']) ?>" class="modal-img-grande mx-auto d-block" alt="<?= htmlspecialchars($projet['titre']) ?>">
-
                                         <div class="description-projet text-center fw-bold ">
                                             <?= nl2br(htmlspecialchars($projet['description'])) ?>
                                         </div>

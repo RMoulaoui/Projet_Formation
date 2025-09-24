@@ -1,69 +1,146 @@
 <?php
-session_start();
+require_once __DIR__ . '/_session.php'; // démarre la session + sécurité
 
-if (!isset($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== true) {
+// Garde d'accès (pages admin protégées)
+if (empty($_SESSION['admin_connecté']) || $_SESSION['admin_connecté'] !== true) {
     header('Location: login.php');
-    exit();
+    exit;
 }
-?>
 
-<?php
-require_once(__DIR__ . '/../../config.php');
+require_once __DIR__ . '/../../config.php'; // PDO
+$erreur = '';
+
+
+// === helpers ===
+function slugify($text) {
+    if (function_exists('iconv')) {
+        $text = iconv('UTF-8', 'ASCII//TRANSLIT', $text);
+    }
+    $text = preg_replace('~[^\\pL\\d]+~u', '-', $text);
+    $text = trim($text, '-');
+    $text = strtolower($text);
+    $text = preg_replace('~[^-a-z0-9]+~', '', $text);
+    return $text ?: 'projet';
+}
+
+// Chemins (adapte si besoin selon ta structure)
+$rootDir     = dirname(__DIR__); // dossier parent de /admin
+$baseDirRel  = 'images/projets';
+$baseDirAbs  = $rootDir . '/' . $baseDirRel;
+if (!is_dir($baseDirAbs)) { @mkdir($baseDirAbs, 0775, true); }
+
 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $titres = $_POST['titre'] ?? [];
-    $descriptions = $_POST['description'] ?? [];
-    $image_urls = $_POST['image_url'] ?? [];
-    $image_files = $_FILES['image_file'] ?? [];
+    if (!csrf_check($_POST['csrf'] ?? '')) {
+        http_response_code(403);
+        exit('Action non autorisée (CSRF).');
+    }
 
-    $nb = count($titres);
+    $titres       = $_POST['titre'] ?? [];
+    $descriptions = $_POST['description'] ?? [];
+    $image_urls   = $_POST['image_url'] ?? [];
+    $image_files  = $_FILES['image_file'] ?? [];
+
+    $nb     = count($titres);
     $errors = 0;
 
     for ($i = 0; $i < $nb; $i++) {
-        $titre = htmlspecialchars(trim($titres[$i]));
-        $description = htmlspecialchars(trim($descriptions[$i]));
-        $image_path = '';
+        $titre       = trim($titres[$i] ?? '');
+        $description = trim($descriptions[$i] ?? '');
+        $image_path  = '';
 
-        // Option 1 : URL fournie
+        // Option 1 : URL fournie (on ne peut pas renommer une URL distante)
         if (!empty($image_urls[$i])) {
-            $image_path = htmlspecialchars(trim($image_urls[$i]));
-        }
-        // Option 2 : fichier uploadé
-        elseif (!empty($image_files['name'][$i])) {
-            $tmp_name = $image_files['tmp_name'][$i];
-            $original_name = basename($image_files['name'][$i]);
-            $extension = strtolower(pathinfo($original_name, PATHINFO_EXTENSION));
-            $allowed = ['jpg', 'jpeg', 'png', 'webp'];
-
-            if (in_array($extension, $allowed) && is_uploaded_file($tmp_name)) {
-                $new_name = uniqid('img_', true) . '.' . $extension;
-                $destination = '../images/projets/' . $new_name;
-                $cheminEnBase = 'images/projets/' . $new_name;
-
-
-                if (move_uploaded_file($tmp_name, $destination)) {
-                $image_path = $cheminEnBase; 
-                }
+            $url = trim($image_urls[$i]);
+            if (filter_var($url, FILTER_VALIDATE_URL) && preg_match('~^https?://~i', $url)) {
+                $image_path = $url;
             }
         }
 
-        // Enregistre si tout est OK
+        // Option 2 : fichier uploadé (RENOMMÉ AU TITRE)
+elseif (!empty($image_files['name'][$i])) {
+    $tmp_name      = $image_files['tmp_name'][$i];
+    $maxSize       = 3 * 1024 * 1024; // 3 Mo
+
+    // Fichier réellement uploadé ?
+    if (!is_uploaded_file($tmp_name)) { $errors++; continue; }
+
+    // Vérif MIME RÉELLE (ne pas se fier à l'extension d'origine)
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mime  = $finfo ? finfo_file($finfo, $tmp_name) : null;
+    if ($finfo) { finfo_close($finfo); }
+
+    // Liste blanche MIME -> extension SÛRE
+    $mimeToExt = [
+        'image/jpeg' => 'jpg',
+        'image/png'  => 'png',
+        'image/webp' => 'webp',
+    ];
+    if (!$mime || !isset($mimeToExt[$mime])) { $errors++; continue; }
+    $extension = $mimeToExt[$mime];
+
+    // Vérif image réelle
+    $imgInfo = @getimagesize($tmp_name);
+    if ($imgInfo === false) { $errors++; continue; }
+
+    // Taille max
+    if (filesize($tmp_name) > $maxSize) { $errors++; continue; }
+
+    // === NOMMER LE FICHIER AVEC LE TITRE ===
+    $baseName = slugify($titre ?: 'projet');
+
+    // Option “joli nom par lot” : ajoute un index 01, 02... pour ce POST (évite les collisions si titres identiques)
+    $index2 = str_pad((string)($i + 1), 2, '0', STR_PAD_LEFT);
+    $nameCandidate = $baseName . '-' . $index2; // ex: mon-projet-01
+
+    $destRel = $baseDirRel . '/' . $nameCandidate . '.' . $extension;
+    $destAbs = $baseDirAbs . '/' . $nameCandidate . '.' . $extension;
+
+    // Si le nom est déjà pris, suffixe -1, -2, ...
+    $j = 1;
+    while (file_exists($destAbs)) {
+        // Si contenu identique -> réutilise le fichier existant (évite doublon)
+        if (sha1_file($destAbs) === sha1_file($tmp_name)) {
+            break;
+        }
+        $destRel = $baseDirRel . '/' . $nameCandidate . '-' . $j . '.' . $extension;
+        $destAbs = $baseDirAbs . '/' . $nameCandidate . '-' . $j . '.' . $extension;
+        $j++;
+    }
+
+    // Écrire le fichier seulement si aucun identique n'existe
+    if (!file_exists($destAbs)) {
+        if (!move_uploaded_file($tmp_name, $destAbs)) { $errors++; continue; }
+    }
+
+    $image_path = $destRel;
+}
+
+
+        // === INSERT BDD pour CE projet ===
         if ($titre && $description && $image_path) {
-            $stmt = $pdo->prepare("INSERT INTO projets (titre, description, image) VALUES (?, ?, ?)");
-            $stmt->execute([$titre, $description, $image_path]);
+            $stmt = $pdo->prepare("INSERT INTO projets (titre, description, image) VALUES (:t, :d, :p)");
+            $stmt->execute([
+                ':t' => $titre,
+                ':d' => $description,
+                ':p' => $image_path,
+            ]);
         } else {
             $errors++;
         }
-    }
+    } // <-- FIN de la boucle for
 
     if ($errors === 0) {
-        header("Location: index.php");
+        header("Location: index.php?added=1");
         exit();
     } else {
         $erreur = "Un ou plusieurs projets n'ont pas pu être ajoutés.";
     }
 }
+
+
+
 
 
 ?>
@@ -135,10 +212,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <a href="index.php">← Retour à la liste</a>
 
         <?php if (!empty($erreur)): ?>
-        <div class="alert alert-danger mt-3"><?= $erreur ?></div>
+        <div class="alert alert-danger mt-3"><?= htmlspecialchars($erreur, ENT_QUOTES) ?></div>
         <?php endif; ?>
 
+
         <form method="POST" enctype="multipart/form-data" class="mt-4">
+            <input type="hidden" name="csrf" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES) ?>">
+
 
             <div id="projets-container">
 
@@ -159,7 +239,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     </div>
                     <div class="mb-2">
                         <label for="image_file1">Ou charger une image depuis votre ordinateur</label>
-                        <input type="file" name="image_file[]" id="image_file1" class="form-control" accept="image/*">
+                        <input type="file" name="image_file[]" id="image_file1" class="form-control" accept="image/jpeg,image/png,image/webp">
                     </div>
 
                 </div>

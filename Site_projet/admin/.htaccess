@@ -1,1 +1,13 @@
 Options -Indexes
+
+# Empêche l'accès aux fichiers sensibles (défense en profondeur)
+
+<FilesMatch "(\.env|envloader\.php|config\.php)$">
+  Require all denied
+</FilesMatch>
+
+# Quelques security headers (côté admin)
+
+<IfModule mod_headers.c>
+  Header always set X-Robots-Tag "noindex, nofollow, noarchive, nosnippet, noimageindex"
+</IfModule>

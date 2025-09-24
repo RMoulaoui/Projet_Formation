@@ -1,23 +1,33 @@
 RewriteEngine On
 
-# Redirige toutes les requêtes HTTP vers HTTPS
-
+# HTTPS -> force
 RewriteCond %{HTTPS} !=on
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-
-# Bloque l’accès aux fichiers sensibles
-
+# Bloque fichiers sensibles
 <FilesMatch "^(\.env|\.git|\.htaccess|config\.php|config_mail\.php)$">
-    Require all denied
+  Require all denied
 </FilesMatch>
 
-# Désactive l'affichage de l’index si pas de index.php ou index.html
-
+# Désactive l’index de répertoire
 Options -Indexes
 
-# Active la protection contre les scripts malveillants renommés
-
+# Défense en profondeur sur extensions à risque
 <FilesMatch "\.(bak|config|sql|ini|log|sh)$">
-    Require all denied
+  Require all denied
 </FilesMatch>
+
+# Sécurité HTTP (ajouts)
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "DENY"
+  Header set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+  Header set Content-Security-Policy "default-src 'self'; img-src 'self' data: blob: https:; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://code.jquery.com https://www.google.com https://www.gstatic.com https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn-uicons.flaticon.com; font-src 'self' https://cdn.jsdelivr.net https://cdn-uicons.flaticon.com; frame-src https://www.google.com https://recaptcha.google.com https://www.recaptcha.net; connect-src 'self' https://www.google.com https://www.gstatic.com; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests"
+</IfModule>
+
+# (Si vendor/ reste dans le webroot)
+RedirectMatch 404 ^/vendor/.*$
+
+
